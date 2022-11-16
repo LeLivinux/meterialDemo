@@ -1,0 +1,29 @@
+<h2>Formular</h2>
+<div *ngIf="person">
+  <mat-form-field class="example-full-width" appearance="fill" >
+      <mat-label>Vorname</mat-label>
+      <input id="firstname" matInput placeholder="Max" [(ngModel)]="person.firstname" >
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>Nachname</mat-label>
+      <input id="lastname" matInput placeholder="Mustermann" [(ngModel)]="person.lastname">
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>Kommentar</mat-label>
+      <textarea matInput placeholder="Kommentar ..." [(ngModel)]="person.comment"></textarea>
+    </mat-form-field>
+
+    <button class="button" matRipple mat-raised-button color="primary" (click)="save(person)"
+              [ngStyle]="{
+              'pointer-events':(person.firstname.length >= 3 && person.lastname.length >= 3) ? 'all' : 'none',
+              'background-color':(person.firstname.length >= 3 && person.lastname.length >= 3) ? 'green' : 'red'
+              }">
+      Save
+    </button>
+</div>
+
+
+
+

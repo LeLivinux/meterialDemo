@@ -1,0 +1,63 @@
+<div style="display: flex;justify-content: center;">
+  <div style="width: 60%;">
+    <div>
+      <app-formular (myEvent)="refresh()" [person]="selectedPerson"></app-formular>
+    </div>
+    <div>
+      <h2>Liste Personen</h2>
+
+      <div style="display: flex; justify-content: space-around">
+      <button class="button" matRipple mat-raised-button (click)="add()"
+              matBadge="{{dataSource.data.length}}" matBadgePosition="above" matBadgeColor="accent"
+              [ngClass]="getButtonColor()">
+        Neue Person
+      </button>
+
+      <button class="button" matRipple mat-raised-button color="primary" (click)="refresh()">
+        Refresh Table
+      </button>
+      </div>
+
+      <mat-card >
+        <table mat-table [dataSource]="dataSource" matSort (matSortChange)="announceSortChange($event)" #sort="matSort" class="mat-elevation-z8">
+
+          <ng-container matColumnDef="action">
+            <th mat-header-cell *matHeaderCellDef>
+
+            </th>
+            <td mat-cell *matCellDef="let element">
+              <mat-icon (click)="onSelect(element)" aria-hidden="false" aria-label="Example home icon" fontIcon="build"></mat-icon>
+              <mat-icon (click)="delete(element)" aria-hidden="false" aria-label="Example home icon" fontIcon="delete_outline"></mat-icon>
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="firstname">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by firstname">
+              Vorname
+            </th>
+            <td mat-cell *matCellDef="let element"> {{element.firstname}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="lastname">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by lastname">
+              Nachname
+            </th>
+            <td mat-cell *matCellDef="let element"> {{element.lastname}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="comment">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by comment">
+              Kommentar
+            </th>
+            <td mat-cell *matCellDef="let element"> {{element.comment}} </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+      </mat-card>
+    </div>
+  </div>
+</div>
+
+
